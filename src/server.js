@@ -5,6 +5,7 @@ import { connectDB } from './config/db.js';
 // importing Routes
 import movieRoutes from "./Routes/movieRoutes.js"; 
 import authRoutes from "./Routes/authRoutes.js";
+import watchlistRoutes from "./Routes/watchlistRoutes.js";
 
 await connectDB();
 
@@ -15,8 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes
-app.use('/movies', movieRoutes); 
-app.use('/auth', authRoutes); 
+app.use('/movies', movieRoutes);
+app.use('/auth', authRoutes);
+app.use('/watchlist', watchlistRoutes);
+
 
 const PORT = 5001;
 

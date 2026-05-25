@@ -19,7 +19,7 @@ model User {
 
   // Relations
   moviesCreated Movie[] @relation("CreatedByUser")
-  watchlists Watchlist[]
+  watchlists WatchlistItem[]
 }
 
 model Movie {
@@ -35,10 +35,10 @@ model Movie {
 
   // Relations
   creator User @relation("CreatedByUser", fields: [createdBy], references: [id], onDelete: Cascade)
-  watchlists Watchlist[] 
+  watchlists WatchlistItem[] 
 }
 
-model Watchlist {
+model WatchlistItem {
   id String @id @default(uuid())
   userId String
   movieId String
@@ -51,6 +51,8 @@ model Watchlist {
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
 
 }
 

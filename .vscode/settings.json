@@ -1,0 +1,8 @@
+{
+    "codeium.apiServerUrl": "https://marketplace.visualstudio.com/items?itemName=Codeium.codeium-enterprise-updater",
+    "codeiumEnterprise.extensionBaseUrl": "https://marketplace.visualstudio.com/items?itemName=Codeium.codeium-enterprise-updater",
+    "codeiumEnterprise.portalUrl": "https://marketplace.visualstudio.com/items?itemName=Codeium.codeium-enterprise-updater",
+    "codeiumEnterprise.extensionDependencies": [
+        "https://marketplace.visualstudio.com/items?itemName=Codeium.codeium-enterprise-updater"
+    ]
+}

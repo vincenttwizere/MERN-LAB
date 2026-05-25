@@ -1,9 +1,9 @@
 import express from 'express';
+import { createMovie } from '../controllers/movieController.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the movies API' });
-});
+router.post('/createMovie', protect, createMovie);
 
 export default router;
