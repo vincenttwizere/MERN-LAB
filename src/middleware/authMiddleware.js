@@ -1,30 +1,43 @@
 import jwt from 'jsonwebtoken';
+import { prisma} from '../config/db.js';
 
-const parseCookies = (cookieHeader = '') => {
-  return cookieHeader.split(';').reduce((cookies, cookie) => {
-    const [name, ...rest] = cookie.trim().split('=');
-    if (!name) return cookies;
-    cookies[name] = decodeURIComponent(rest.join('='));
-    return cookies;
-  }, {});
-};
+export const authMiddleware = async (req, res, next) => {
 
-const protect = (req, res, next) => {
-  const cookies = parseCookies(req.headers.cookie);
-  const authHeader = req.headers.authorization;
-  const token = cookies.token || cookies.jwt || (authHeader?.startsWith('Bearer ') ? authHeader.split(' ')[1] : undefined);
+    console.log('Auth middleware reached');
+    
+    let token;
 
-  if (!token) {
-    return res.status(401).json({ error: 'Authentication required' });
-  }
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { id: decoded.id };
-    return next();
-  } catch (error) {
-    return res.status(401).json({ error: 'Invalid or expired token' });
-  }
-};
+      token = req.headers.authorization.split('')[1];
+    } else if (req.cookies.jwt) {
 
-export { protect };
+      token = req.cookies.jwt;
+    }
+
+    if (!token) {
+    
+      return res.status(401).json({ error: 'Not authorized, no token' });
+    }
+
+    try {
+      //Verify token and get user id from token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.id },
+      });
+
+      if (!user) {
+        return res.status(401).json({ error: 'User no longer exists' });
+      }
+
+      req.user = user;
+      next();
+
+    } catch (error){
+
+       return res.status(401).json({ error: 'Not authorized, token failed' });
+
+    }
+} 
