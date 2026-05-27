@@ -9,10 +9,10 @@ export const authMiddleware = async (req, res, next) => {
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 
-      token = req.headers.authorization.split('')[1];
-    } else if (req.cookies.jwt) {
+      token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies && (req.cookies.jwt || req.cookies.token)) {
 
-      token = req.cookies.jwt;
+      token = req.cookies.jwt || req.cookies.token;
     }
 
     if (!token) {

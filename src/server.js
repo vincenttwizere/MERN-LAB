@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { connectDB } from './config/db.js';
 
 // importing Routes
@@ -14,6 +15,7 @@ const app = express();
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // API Routes
 app.use('/movies', movieRoutes);
