@@ -13,5 +13,6 @@ router.use(authMiddleware);
 router.post('/addToWatchlist', addToWatchlist);
 router.delete('/removeFromWatchlist/:id', removeFromWatchlist);
 router.put('/updateWatchlistItem/:id', updateWatchlistItem);
+router.post('/updateWatchlistItem/:id', updateWatchlistItem);
 
 export default router;

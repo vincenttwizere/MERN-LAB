@@ -1,5 +1,18 @@
 import { prisma } from '../config/db.js';
 
+const VALID_STATUSES = ['Planned', 'Watching', 'Completed', 'Dropped'];
+
+const validateStatus = (status, res) => {
+  if (status === undefined) return true;
+  if (!VALID_STATUSES.includes(status)) {
+    res.status(400).json({
+      error: `status must be one of: ${VALID_STATUSES.join(', ')}`,
+    });
+    return false;
+  }
+  return true;
+};
+
 const addToWatchlist = async (req, res) => {
   try {
     const { movieId, status, rating, notes } = req.body || {};
@@ -7,6 +20,8 @@ const addToWatchlist = async (req, res) => {
     if (!movieId) {
       return res.status(400).json({ error: 'movieId is required' });
     }
+
+    if (!validateStatus(status, res)) return;
 
     const movie = await prisma.movie.findUnique({
       where: { id: movieId },
@@ -26,7 +41,19 @@ const addToWatchlist = async (req, res) => {
     });
 
     if (existingInWatchlist) {
-      return res.status(400).json({ error: 'movie already in watchlist' });
+      const watchlistItem = await prisma.watchlistItem.update({
+        where: { id: existingInWatchlist.id },
+        data: {
+          ...(status !== undefined && { status }),
+          ...(rating !== undefined && { rating }),
+          ...(notes !== undefined && { notes }),
+        },
+      });
+
+      return res.status(200).json({
+        message: 'watchlist item updated',
+        data: { watchlistItem },
+      });
     }
 
     const watchlistItem = await prisma.watchlistItem.create({
@@ -80,6 +107,18 @@ const updateWatchlistItem = async (req, res) => {
   try {
     const { id } = req.params;
     const { status, rating, notes } = req.body || {};
+
+    if (!id) {
+      return res.status(400).json({ error: 'watchlist item id is required in the URL' });
+    }
+
+    if (status === undefined && rating === undefined && notes === undefined) {
+      return res.status(400).json({
+        error: 'provide at least one field to update: status, rating, or notes',
+      });
+    }
+
+    if (!validateStatus(status, res)) return;
 
     const watchlistItem = await prisma.watchlistItem.findUnique({
       where: { id },
