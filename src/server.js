@@ -1,7 +1,9 @@
 import 'dotenv/config';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import swaggerUi from 'swagger-ui-express';
 import { connectDB } from './config/db.js';
+import { swaggerDocument } from './swagger.js';
 
 // importing Routes
 import movieRoutes from "./Routes/movieRoutes.js"; 
@@ -16,6 +18,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // API Routes
 app.use('/movies', movieRoutes);
