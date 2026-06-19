@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+/* simple cinematic background */
+body {
+  background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 6%), linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 40%);
+}
+
+/* hover poster zoom */
+.movie-poster-hover:hover img{ transform: scale(1.03); }
+.movie-poster-hover img{ transition: transform .18s ease-in-out }
+
+/* simple skeleton */
+.skeleton{ background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 100%); animation: shimmer 1.2s infinite }
+@keyframes shimmer{ 0%{ background-position: -200px 0 } 100%{ background-position: 200px 0 } }
