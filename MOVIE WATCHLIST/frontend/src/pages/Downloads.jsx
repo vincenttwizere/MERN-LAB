@@ -13,7 +13,7 @@ export default function Downloads() {
         <h1 className="text-3xl font-semibold text-white">Downloads</h1>
         <p className="text-sm text-neutral-400">Offline access for your favorite films and series.</p>
       </div>
-      <div className="grid justify-center gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="movie-grid">
         {downloads.map((item) => (
           <div key={item.id} className="rounded-[32px] border border-white/10 bg-[#09090f] p-6 shadow-glow">
             <div className="flex items-center gap-4">

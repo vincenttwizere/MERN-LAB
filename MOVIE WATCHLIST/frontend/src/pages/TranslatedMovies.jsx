@@ -16,7 +16,7 @@ export default function TranslatedMovies() {
         <h1 className="text-3xl font-semibold text-white">Translated Movies</h1>
         <p className="text-sm text-neutral-400">Showing movies translated by <span className="text-white">{translatorName || 'our top translators'}</span>.</p>
       </div>
-      <div className="grid justify-center gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="movie-grid">
         {filtered.length ? (
           filtered.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         ) : (

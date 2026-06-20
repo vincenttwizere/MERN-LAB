@@ -58,7 +58,7 @@ export default function NavBar() {
 
   return (
     <header className="navbar fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center gap-6 px-3 py-3 lg:px-6">
+      <div className="navbar-inner mx-auto flex items-center gap-4 py-3 lg:gap-5">
         <Link to="/" className="text-xl font-bold tracking-wide text-white">🎬 CineWatch</Link>
 
         <nav className="hidden flex-1 items-center gap-4 lg:flex">

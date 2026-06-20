@@ -29,13 +29,13 @@ export default function Search() {
         <p className="text-sm text-neutral-400">Showing {results.length} matches for “{term || 'all'}”.</p>
       </div>
 
-      <div className="grid justify-center gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="movie-grid">
         {results.length ? (
           results.map((item) => (
-            <Link key={item.id} to={item.type === 'series' ? `/series/${item.id}/detail` : `/movies/${item.id}`} className="group overflow-hidden rounded-[28px] border border-white/10 bg-[#0b0b11] p-4 transition hover:-translate-y-1 hover:border-brand/40">
-              <img src={item.posterUrl} alt={item.title} className="h-56 w-full rounded-3xl object-cover" />
-              <div className="mt-4 space-y-2">
-                <h2 className="text-lg font-semibold text-white">{item.title}</h2>
+            <Link key={item.id} to={item.type === 'series' ? `/series/${item.id}/detail` : `/movies/${item.id}`} className="group overflow-hidden rounded-[18px] border border-white/10 bg-[#0b0b11] p-3 transition hover:-translate-y-1 hover:border-brand/40">
+              <img src={item.posterUrl} alt={item.title} className="h-44 w-full rounded-2xl object-cover" />
+              <div className="mt-3 space-y-2">
+                <h2 className="text-md font-semibold text-white">{item.title}</h2>
                 <p className="text-sm text-neutral-400">{item.genre?.slice(0, 3).join(' | ')}</p>
               </div>
             </Link>

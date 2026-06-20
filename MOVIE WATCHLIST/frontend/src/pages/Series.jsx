@@ -26,7 +26,7 @@ export default function Series() {
         </div>
       </div>
 
-      <div className="grid justify-center gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        <div className="movie-grid">
         {series.map((entry) => (
           <SeriesCard key={entry.id} series={entry} />
         ))}

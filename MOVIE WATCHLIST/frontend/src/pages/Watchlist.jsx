@@ -11,7 +11,7 @@ export default function Watchlist() {
         <h1 className="text-3xl font-semibold text-white">My Watchlist</h1>
         <p className="text-sm text-neutral-400">Keep track of your saved movies and continue right where you left off.</p>
       </div>
-      <div className="grid justify-center gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="movie-grid">
         {items.length ? (
           items.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         ) : (
