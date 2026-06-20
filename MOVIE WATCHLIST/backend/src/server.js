@@ -16,23 +16,15 @@ await connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 // CORS support for frontend
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', corsOptions.origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', corsOptions.methods.join(', '));
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    return res.sendStatus(204);
-  }
-  next();
-});
+app.options('*', cors(corsOptions));
 
 // Body parsing middleware
 app.use(express.json());

@@ -1,26 +1,34 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../api/api'
+import toast from 'react-hot-toast'
+import useAuthStore from '../store/authStore'
 
-export default function Register(){
-  const [form, setForm] = useState({ username:'', email:'', password:'' })
+export default function Register() {
+  const [form, setForm] = useState({ username: '', email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const navigate = useNavigate()
+  const setAuth = useAuthStore((state) => state.setAuth)
 
-  const submit = async (e) =>{
+  const submit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
-    try{
-      const res = await auth.register(form)
-      if (res.token){
-        localStorage.setItem('token', res.token)
-        navigate('/')
-      } else {
-        setError(res.message || 'Registration failed')
+    try {
+      const user = {
+        id: 'u2',
+        username: form.username || form.email.split('@')[0],
+        email: form.email,
+        role: form.email.includes('admin') ? 'admin' : 'user',
+        createdAt: new Date().toISOString(),
       }
-    }catch(err){ setError(err.message || String(err)) }
+      setAuth('demo-token', user)
+      toast.success('Welcome to CineWatch')
+      navigate('/')
+    } catch (err) {
+      setError(err?.message || 'Registration failed')
+      toast.error('Registration failed')
+    }
     setLoading(false)
   }
 
@@ -34,20 +42,39 @@ export default function Register(){
         <form className="space-y-4" onSubmit={submit}>
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Username</label>
-            <input value={form.username} onChange={e=>setForm({...form, username:e.target.value})} className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600" />
+            <input
+              value={form.username}
+              onChange={(e) => setForm({ ...form, username: e.target.value })}
+              className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600"
+              required
+            />
           </div>
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Email</label>
-            <input value={form.email} onChange={e=>setForm({...form, email:e.target.value})} type="email" className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600" />
+            <input
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              type="email"
+              className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600"
+              required
+            />
           </div>
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Password</label>
-            <input value={form.password} onChange={e=>setForm({...form, password:e.target.value})} type="password" className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600" />
+            <input
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              type="password"
+              className="w-full px-3 py-2 rounded bg-neutral-700 border border-neutral-600"
+              required
+            />
           </div>
 
           {error && <div className="text-sm text-red-400">{error}</div>}
 
-          <button disabled={loading} type="submit" className="w-full py-2 rounded bg-red-600 hover:bg-red-700 text-white font-medium">{loading? 'Creating...' : 'Create Account'}</button>
+          <button disabled={loading} type="submit" className="w-full py-2 rounded bg-red-600 hover:bg-red-700 text-white font-medium">
+            {loading ? 'Creating...' : 'Create Account'}
+          </button>
 
           <div className="text-center text-sm text-neutral-400">
             Already have an account? <a href="/login" className="text-red-400 hover:underline">Login</a>

@@ -1,0 +1,125 @@
+export const translators = ['Rocky', 'Junior', 'Younger', 'Savimbi', 'Pick', 'Sankara']
+
+export const countries = [
+  { id: 'rwanda', label: 'Rwanda', flag: '🇷🇼' },
+  { id: 'korea', label: 'Korea', flag: '🇰🇷' },
+  { id: 'india', label: 'India', flag: '🇮🇳' },
+  { id: 'nigeria', label: 'Nigeria', flag: '🇳🇬' },
+]
+
+export const featuredMovies = [
+  {
+    id: '1',
+    title: 'Phantom Night',
+    genre: ['Action', 'Thriller'],
+    rating: 8.7,
+    year: 2025,
+    runtime: 132,
+    language: 'English',
+    backdrops: ['https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=1400&q=80'],
+    overview: 'A former spy returns for one last mission to stop a conspiracy that reaches the highest levels of power.',
+    translatedBy: 'Rocky',
+    posterUrl: 'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=500&q=80',
+    status: 'New',
+    type: 'movie',
+  },
+  {
+    id: '2',
+    title: 'Midnight Heist',
+    genre: ['Crime', 'Drama'],
+    rating: 8.2,
+    year: 2024,
+    runtime: 118,
+    language: 'English',
+    backdrops: ['https://images.unsplash.com/photo-1524730229677-1bf0fb7304cc?auto=format&fit=crop&w=1400&q=80'],
+    overview: 'A crew of thieves must pull off the perfect job while evading a ruthless detective.',
+    translatedBy: 'Junior',
+    posterUrl: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80',
+    status: 'Top Rated',
+    type: 'movie',
+  },
+]
+
+export const movies = [
+  ...featuredMovies,
+  {
+    id: '3',
+    title: 'Solar Drift',
+    genre: ['Sci-Fi', 'Adventure'],
+    rating: 8.5,
+    year: 2024,
+    runtime: 137,
+    language: 'English',
+    translatedBy: 'Pick',
+    posterUrl: 'https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=500&q=80',
+    status: 'Trending',
+    type: 'movie',
+  },
+  {
+    id: '4',
+    title: 'Crimson Horizon',
+    genre: ['Horror', 'Mystery'],
+    rating: 7.9,
+    year: 2024,
+    runtime: 106,
+    language: 'Translated',
+    translatedBy: 'Savimbi',
+    posterUrl: 'https://images.unsplash.com/photo-1500534314209-a26cffeb0744?auto=format&fit=crop&w=500&q=80',
+    status: 'Horror',
+    type: 'movie',
+  },
+  {
+    id: '5',
+    title: 'Neon Streets',
+    genre: ['Action', 'Drama'],
+    rating: 8.1,
+    year: 2025,
+    runtime: 123,
+    language: 'English',
+    translatedBy: 'Younger',
+    posterUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=500&q=80',
+    status: 'Action',
+    type: 'movie',
+  },
+]
+
+export const seriesList = [
+  {
+    id: 's1',
+    title: 'Kingdom Rising',
+    country: 'korea',
+    genre: ['Romance', 'Drama'],
+    rating: 9.1,
+    seasons: 2,
+    status: 'Completed',
+    posterUrl: 'https://images.unsplash.com/photo-1526244434298-88fcbcb066b5?auto=format&fit=crop&w=500&q=80',
+    type: 'series',
+  },
+  {
+    id: 's2',
+    title: 'Savannah Nights',
+    country: 'nigeria',
+    genre: ['Drama', 'Thriller'],
+    rating: 8.4,
+    seasons: 1,
+    status: 'Ongoing',
+    posterUrl: 'https://images.unsplash.com/photo-1542204165-4c12c2acca27?auto=format&fit=crop&w=500&q=80',
+    type: 'series',
+  },
+  {
+    id: 's3',
+    title: 'Rwanda Wild',
+    country: 'rwanda',
+    genre: ['Historical', 'Drama'],
+    rating: 8.8,
+    seasons: 3,
+    status: 'Completed',
+    posterUrl: 'https://images.unsplash.com/photo-1523475496153-3d6cc1b8100b?auto=format&fit=crop&w=500&q=80',
+    type: 'series',
+  },
+]
+
+export const watchHistory = [
+  { id: '1', title: 'Phantom Night', progress: 28, posterUrl: featuredMovies[0].posterUrl },
+  { id: '3', title: 'Solar Drift', progress: 72, posterUrl: 'https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=500&q=80' },
+]
